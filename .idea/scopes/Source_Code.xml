@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Source Code" pattern="file[pytemplate]:sample_module//*||file:Makefile||file:setup.py||file:tox.ini||file:conftest.py||file[pytemplate]:test//*" />
+</component>

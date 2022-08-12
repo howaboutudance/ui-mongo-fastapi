@@ -1,0 +1,48 @@
+[tool.poetry]
+name = "sample_module"
+version = "0.1.0"
+description = "A Small Example Package"
+authors = ["Michael Penhallegon <mike@hematite.tech>"]
+license = "Apache-2"
+packages = [
+    {include="sample_module", from="src", format="wheel"}
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+wheel = "^0.37.0"
+
+[tool.poetry.dev-dependencies]
+ipdb = "^0.13.9"
+yapf = "^0.31.0"
+flake8 = "^4.0.1"
+pytest = "^6.2.5"
+tox = "mypy"
+mypy = "^0.910"
+safety = "^1.10.3"
+
+
+[tool.mypy]
+python_version="3.8"
+exclude="venv*"
+
+[tool.flake8]
+max-line-length=120
+
+[tool.yapf]
+based_on_style="google"
+ident_width=2
+
+[tool.isort]
+line_length=120
+force_single_line=true
+src_paths=["src/sample_module", "src/sample_module"]
+
+[tool.pytest.ini_options]
+markers =  [
+    "integration",
+    ]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
