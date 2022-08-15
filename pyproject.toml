@@ -1,16 +1,20 @@
 [tool.poetry]
-name = "sample_module"
+name = "ui_mongo"
 version = "0.1.0"
-description = "A Small Example Package"
+description = "A FastAPI app for learning how to use mongodb"
 authors = ["Michael Penhallegon <mike@hematite.tech>"]
 license = "Apache-2"
 packages = [
-    {include="sample_module", from="src", format="wheel"}
+    {include="ui_mongo", from="src", format="wheel"}
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.10"
 wheel = "^0.37.0"
+dynaconf = "^3.1.9"
+fastapi = "^0.79.0"
+motor = "^3.0.0"
+uvicorn = "^0.18.2"
 
 [tool.poetry.dev-dependencies]
 ipdb = "^0.13.9"
