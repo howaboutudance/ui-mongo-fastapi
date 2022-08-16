@@ -4,17 +4,17 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
             "name": "Python: FastAPI",
             "type": "python",
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "src.ui_mongo.api:app"
+                "--app-dir=./src",
+                "ui_mongo.api:app"
             ],
             "jinja": true,
-            "justMyCode": true
+            "justMyCode": true,
         }
     ]
 }

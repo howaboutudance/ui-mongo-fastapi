@@ -15,37 +15,47 @@ dynaconf = "^3.1.9"
 fastapi = "^0.79.0"
 motor = "^3.0.0"
 uvicorn = "^0.18.2"
+opentelemetry-instrumentation-fastapi = "^0.33b0"
 
 [tool.poetry.dev-dependencies]
+isort = "^5.10.1"
 ipdb = "^0.13.9"
 yapf = "^0.31.0"
 flake8 = "^4.0.1"
 pytest = "^6.2.5"
-tox = "mypy"
+tox = "rewrite"
 mypy = "^0.910"
 safety = "^1.10.3"
+pytest-asyncio = "^0.19.0"
+mongomock-motor = "^0.0.12"
+async-asgi-testclient = "^1.4.11"
 
+[tool.flake8]
+max-line-length=120
+ignore = ['E111']
+
+[tool.isort]
+line_length=120
+force_single_line=true
+src_paths=["src/ui_mongo", "src/ui_mongo"]
 
 [tool.mypy]
 python_version="3.8"
 exclude="venv*"
 
-[tool.flake8]
-max-line-length=120
+[tool.pytest.ini_options]
+env = [
+    "ENV_FOR_DYNACONF=dev_testing"
+]
+markers =  [
+    "integration",
+    ]
+norecursedirs=["scripts/*"]
+asyncio_mode = "auto"
 
 [tool.yapf]
 based_on_style="google"
 ident_width=2
-
-[tool.isort]
-line_length=120
-force_single_line=true
-src_paths=["src/sample_module", "src/sample_module"]
-
-[tool.pytest.ini_options]
-markers =  [
-    "integration",
-    ]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -5,6 +5,7 @@ import logging
 settings = Dynaconf(
     envvar_prefix="DYNACONF",
     settings_files=['settings.toml', '.secrets.toml'],
+    environments=True
 )
 
 # `envvar_prefix` = export envvars with `export DYNACONF_FOO=bar`.
