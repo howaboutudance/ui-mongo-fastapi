@@ -15,14 +15,14 @@ class EntryTransactionType(Enum):
 UI_ENTRY_CREATED = prometheus_client.Counter(
     f"{config.settings.app_name}_entry_transactions",
     "number of transaction on entries",
-    labelnames=["app_name", "transaction_type", "function_name"]
+    labelnames=["app_name", "method", "function_name"]
 )
 
 
 def inc_entry_transaction(transaction_type: EntryTransactionType,
                           app: str = config.settings.app_name,
                           function_name: str = "unkown"):
-    UI_ENTRY_CREATED.labels(app, str(transaction_type), function_name).inc()
+    UI_ENTRY_CREATED.labels(app, transaction_type.value, function_name).inc()
 
 
 # decorator for routes
