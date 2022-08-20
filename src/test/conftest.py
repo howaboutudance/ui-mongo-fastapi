@@ -1,9 +1,12 @@
 import asyncio
 
+from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 import motor.motor_asyncio
 from typing import List, Dict, Any
 import pytest
+
+from ui_mongo.metrics import EntryTransactionType, transaction_metric
 
 
 @pytest.fixture(scope="session")
@@ -14,6 +17,22 @@ def event_loop():
         loop = asyncio.new_event_loop()
     yield loop
     loop.close()
+
+
+@pytest.fixture
+def metrics_test_app() -> FastAPI:
+    from starlette_prometheus import metrics, PrometheusMiddleware
+    from starlette.responses import JSONResponse
+    app = FastAPI()
+    app.add_middleware(PrometheusMiddleware)
+    app.add_route("/metrics", metrics)
+
+    @transaction_metric(transaction_type=EntryTransactionType.get)
+    @app.get("/foo/")
+    async def get_foo() -> JSONResponse:
+        return JSONResponse({"type": "foo"})
+
+    return app
 
 
 @pytest.fixture

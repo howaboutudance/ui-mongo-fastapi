@@ -8,7 +8,7 @@ def test_activities_fixture(activities_fixture):
 
 
 @pytest.mark.asyncio
-async def test_fixture_list_job_activity(mock_db):
+async def test_list_job_activity(mock_db):
     job_activity_list = await mock_db["job_activity"].find().to_list(1000)
     assert "_id" in job_activity_list[0]
     assert "desc" in job_activity_list[0]
