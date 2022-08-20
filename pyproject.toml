@@ -15,13 +15,12 @@ dynaconf = "^3.1.9"
 fastapi = "^0.79.0"
 motor = "^3.0.0"
 uvicorn = "^0.18.2"
-opentelemetry-instrumentation-fastapi = "^0.33b0"
 
 [tool.poetry.dev-dependencies]
 isort = "^5.10.1"
 ipdb = "^0.13.9"
 yapf = "^0.31.0"
-flake8 = "^4.0.1"
+flake8 = "^5.0.1"
 pytest = "^6.2.5"
 tox = "rewrite"
 mypy = "^0.910"
@@ -29,10 +28,13 @@ safety = "^1.10.3"
 pytest-asyncio = "^0.19.0"
 mongomock-motor = "^0.0.12"
 async-asgi-testclient = "^1.4.11"
+pytest-dotenv = "^0.5.2"
+black = "^22.6.0"
+Flake8-pyproject = "^1.1.0"
 
 [tool.flake8]
 max-line-length=120
-ignore = ['E111']
+extend-ignore=["E111"]
 
 [tool.isort]
 line_length=120
@@ -43,10 +45,16 @@ src_paths=["src/ui_mongo", "src/ui_mongo"]
 python_version="3.8"
 exclude="venv*"
 
-[tool.pytest.ini_options]
-env = [
-    "ENV_FOR_DYNACONF=dev_testing"
+[[tool.mypy.overrides]]
+module = [
+    "dynaconf",
+    "uvicorn",
+    "motor",
+    "motor.motor_asyncio"
 ]
+ignore_missing_imports=true
+
+[tool.pytest.ini_options]
 markers =  [
     "integration",
     ]

@@ -13,3 +13,10 @@ podman pod create \
 podman run -dt --pod mongo \
     -v ./scripts/data/mongodb:/data/db:z \
     docker.io/mongo:3
+
+podman pod create \
+    --network=ui-mongo-network \
+    -n prometheus
+
+podman run -dt --pod prometheus \
+    docker.io/prom/prometheus
