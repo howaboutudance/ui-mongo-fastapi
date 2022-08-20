@@ -12,9 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SAMPLE_TAG = hematite/pytemplate-docker
-SAMPLE_INTERACT = hematite/pytemplate-interact
-SAMPLE_TEST = hematite/pytemplate-test
+SAMPLE_TAG = hematite/ui-mongo
+SAMPLE_TEST = hematite/ui-mongo-test
 DOCKER_BUILD=docker build ./ -f Dockerfile
 DOCKER_RUN=docker run
 VENV_VERSION_FOLDER := venv$(shell python3 --version | sed -ne 's/[^0-9]*\(\([0-9]*\.\)\{0,2\}\).*/\1/p' | sed -e "s/\.//g")
@@ -35,12 +34,17 @@ interact: FORCE
 	${DOCKER_BUILD} --target=interact -t ${SAMPLE_TEST}
 	${DOCKER_RUN} -it ${SAMPLE_INTERACT}
 
-test: FORCE
-	${DOCKER_BUILD} --target=test -t ${SAMPLE_INTERACT}
-	${DOCKER_RUN} -it ${SAMPLE_INTERACT}
+.PHONY: test
+test: lint FORCE
+	poetry run pytest
 
-local-test: FORCE
-	tox
-	mypy sample_module/
+.PHONY: lint 
+lint:
+	poetry run mypy src/ui_mongo
+	poetry run flake8 src/ui_mongo src/test
 
-FORCE:
+run-local: FORCE
+	cd ./src/
+	poetry run python ui_mongo
+
+FORCE: ;
