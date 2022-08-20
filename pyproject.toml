@@ -15,6 +15,7 @@ dynaconf = "^3.1.9"
 fastapi = "^0.79.0"
 motor = "^3.0.0"
 uvicorn = "^0.18.2"
+prometheus-client = "^0.14.1"
 
 [tool.poetry.dev-dependencies]
 isort = "^5.10.1"

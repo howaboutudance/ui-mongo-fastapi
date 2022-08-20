@@ -16,7 +16,8 @@ podman run -dt --pod mongo \
 
 podman pod create \
     --network=ui-mongo-network \
-    -n prometheus
+    -n prometheus \
+    -p 9090:9090
 
 podman run -dt --pod prometheus \
     docker.io/prom/prometheus
